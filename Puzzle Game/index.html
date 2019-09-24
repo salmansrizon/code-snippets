@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Image Puzzle</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="css/image-puzzle.css" rel="stylesheet" />
+
+	<!-- bootstrap CDNs -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+	</script>
+
+
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/image-puzzle.js"></script>
+</head>
+
+<body>
+	<!-- <div class="card">
+		<article class="card-body">
+			<h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
+			<hr>
+			<p class="text-success text-center">Some message goes here</p>
+			<form
+				action="https://docs.google.com/forms/d/e/1FAIpQLSdmBXPLWTEevxzSQ01dYU6weCKR5c-8isnrTXKg-gU0c0A8TQ/formResponse"
+				method="POST" onsubmit="submitted = true">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+						</div>
+						<input name="entry.199450057" class="form-control" placeholder="Name" type="text">
+					</div> <!-- input-group.// -->
+				</div> <!-- form-group// -->
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+						</div>
+						<input name="entry.1960309086" class="form-control" placeholder="Your Email" type="email">
+					</div> <!-- input-group.// -->
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+						</div>
+						<input name="entry.1377247006" class="form-control" placeholder="Your phone Number"
+							type="number">
+					</div> <!-- input-group.// -->
+				</div>
+				<div class="form-group">
+					<button onclick="showGame()" class="btn btn-primary btn-block" id="submit-button"
+						jsaction="click:cOuCgd; mousedown:UX7yZ; mouseup:lbsD7e; mouseenter:tfO1Yc; mouseleave:JywGue; focus:AHmuwe; blur:O22p3e; contextmenu:mg9Pef;touchstart:p6p2H; touchmove:FwuNnf; touchend:yfqBxc(preventMouseEvents=true|preventDefault=true); touchcancel:JMtRjd;">
+						Start Game </button>
+					<div id="result"></div>
+				</div> <!-- form-group// -->
+				<p class="text-center"><a href="#" class="btn">Forgot password?</a></p>
+			</form>
+		</article>
+		<script>
+			$("#submit-button").on('click', function (e) {
+				e.preventDefault();
+				$("#result").load(
+					"https://docs.google.com/forms/d/e/1FAIpQLSdmBXPLWTEevxzSQ01dYU6weCKR5c-8isnrTXKg-gU0c0A8TQ/formResponse"
+				);
+				alert("Page loading completed");
+			});
+		</script>
+	</div> -->
+	<div id="collage" style="display:none;">
+		<h2>Image Puzzle</h2>
+		<hr />
+		<div id="playPanel" style="padding:5px;display:block;">
+			<h3 id="imgTitle"></h3>
+			<hr />
+			<div style="display:inline-block; margin:auto; width:95%; vertical-align:top;">
+				<ul id="sortable" class="sortable"></ul>
+				<div id="actualImageBox">
+					<div id="stepBox">
+						<div>Steps:</div>
+						<div class="stepCount">0</div>
+					</div>
+					<div id="timeBox">
+						Time Taken: <span id="timerPanel"></span> secs
+					</div>
+					<img id="actualImage" />
+					<div>Re-arrange to create a picture like this.</div>
+					<p id="levelPanel">
+						<input type="radio" name="level" id="easy" checked="checked" value="3" /> <label
+							for="easy">Easy</label>
+						<input type="radio" name="level" id="medium" value="5" /> <label for="medium">Medium</label>
+						<input type="radio" name="level" id="hard" value="7" /> <label for="hard">Hard</label>
+					</p>
+					<div>
+						<button id="btnRule" type="button" class="btn" onclick="rules();">Rules</button>
+						<button id="newPhoto" type="button" class="btn">Another Photo</button>
+						<button id="btnReplay" type="button" class="btn" onclick="about();">About</button>
+					</div> 
+				</div>
+			</div> 
+		</div>
+		<div id="gameOver" style="display:none;">
+			<div style="background-color: #fc9e9e; padding: 5px 10px 20px 10px; text-align: center; ">
+				<h2 style="text-align:center">Game Over!!</h2>
+				Congratulations!! <br /> You have completed this picture.
+				<br />
+				Steps: <span class="stepCount">0</span> steps.
+				<br />
+				Time Taken: <span class="timeCount">0</span> seconds<br />
+				<div>
+					<button type="button" onclick="window.location.reload(true);">Play Again</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			var images = [{
+					src: 'images/london-bridge.jpg',
+					title: 'London Bridge'
+				},
+				{
+					src: 'images/lotus-temple.jpg',
+					title: 'Lotus Temple'
+				},
+				{
+					src: 'images/qutub-minar.jpg',
+					title: 'Qutub Minar'
+				},
+				{
+					src: 'images/statue-of-liberty.jpg',
+					title: 'Statue Of Liberty'
+				},
+				{
+					src: 'images/taj-mahal.jpg',
+					title: 'Taj Mahal'
+				}
+			];
+
+			$(function () {
+				var gridSize = $('#levelPanel :radio:checked').val();
+				imagePuzzle.startGame(images, gridSize);
+				// $('#newPhoto').click(function () {
+				// 	var gridSize = $('#levelPanel :radio:checked').val(); // Take the updated gridSize from UI.
+				// 	imagePuzzle.startGame(images, gridSize);
+				// });
+
+				$('#levelPanel :radio').change(function (e) {
+					var gridSize = $(this).val();
+					imagePuzzle.startGame(images, gridSize);
+				});
+			});
+
+			function showGame() {
+				document.getElementById('collage').style.display = "block";
+			}
+		</script>
+	</div>
+</body>
+
+</html>
