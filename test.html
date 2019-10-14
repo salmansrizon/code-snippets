@@ -1,0 +1,306 @@
+<script src="https://salmansrizon.github.io/portfolio/Winwheel.min.js"></script>
+<!-- <script src="custom.js"></script> -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+</script>
+<style>
+    .the_wheel {
+        background-image: url('https://laz-img-cdn.alicdn.com/images/ims-web/TB1pV2Ihlr0gK0jSZFnXXbRRXXa.jpg');
+        background-position: center;
+        background-repeat: no-repeat !important;
+        /* margin-left: -10px !important; */
+    }
+
+    .power_controls {
+        background-image: url('https://laz-img-cdn.alicdn.com/images/ims-web/TB1aO2_hlr0gK0jSZFnXXbRRXXa.jpg');
+        background-repeat: no-repeat !important;
+        background-position: center
+    }
+
+    .top-banner {
+        background-image: url('https://laz-img-cdn.alicdn.com/images/ims-web/TB1LVHIhlr0gK0jSZFnXXbRRXXa.jpg');
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        padding-top: 121px !important;
+    }
+
+    #pop-button {
+        margin-top: -20px !important;
+    }
+
+    #header-wrapper {
+        height: 0px;
+    }
+    #spin_button{
+        margin-top: -30px;
+    }
+
+
+    .lzd-act-richtext {
+        font-family: Arial, Verdana, sans-serif !important;
+        line-height: normal !important;
+        word-wrap: break-word;
+        word-break: keep-all;
+        overflow: hidden;
+        padding: 12px;
+        margin-top: 0px !important;
+    }
+
+    dialog {
+        display: block;
+        text-align: center !important;
+        position: inherit !important;
+        left: 10px;
+        right: 10px;
+        width: -webkit-fit-content;
+        height: -webkit-fit-content;
+        color: black;
+        margin: auto;
+        border-width: initial;
+        border-style: solid;
+        border-color: initial;
+        border-image: initial;
+        padding: 0em;
+        background: #414141;
+        top: 45%;
+
+    }
+
+    body {
+        font-family: arial;
+        width: 100%;
+        height: auto;
+        /* background-color: ff3e5e; */
+    }
+
+
+    h1,
+    p {
+        margin: 0;
+    }
+
+    /* Style applied to the spin button once a power has been selected */
+    .clickable {
+        cursor: pointer;
+    }
+
+    /* Other misc styles */
+    .margin_bottom {
+        margin-bottom: 5px;
+    }
+</style>
+
+<div style="margin-top: -51px">
+    <div class="top-banner col-sm-12" style="bottom: -25px">
+
+    </div>
+    <div align="center" class="container">
+
+        <div cellpadding="0" cellspacing="0" border="0" class="row">
+            <div class="col-sm-12">
+                <div width="318" height="418" class="the_wheel" align="center" valign="center">
+                    <canvas id="canvas" width="315" height="418">
+                        <p style="color: white" align="center">Sorry, your browser doesn't support canvas. Please
+                            try another.</p>
+                    </canvas>
+                </div>
+                <div class="power_controls col-sm-12" style="bottom: 9px;">
+                    <br />
+                    <img id="spin_button"
+                        src="https://laz-img-cdn.alicdn.com/images/ims-web/TB1JQH_hlr0gK0jSZFnXXbRRXXa.gif" alt="Spin"
+                        onClick="startSpin();" />
+                    <br /><br />
+                    <!-- &nbsp;&nbsp;<a href="#" onClick="resetWheel(); return false;">Play
+                            Again</a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(reset) -->
+                </div>
+
+            </div>
+        </div>
+        <dialog id="myDialog" style="border: none; top: 35%; height: 318px;">
+                <div id="textresult" style="color:black;  font-size: 3em"></div>
+                <div id="pop-button" style="margin-top:-100px!important;"></div>
+            </dialog>
+    </div>
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    // var Winwheel;
+    var theWheel = new Winwheel({
+        'numSegments': 4, // Specify number of segments.
+        'outerRadius': 150, // Set outer radius so wheel fits inside the background.
+        'drawMode': 'image', // drawMode must be set to image.
+        'drawText': true, // Need to set this true if want code-drawn text on image wheels.
+        'textFontSize': 12, // Set text options as desired.
+        'textOrientation': 'curved',
+        'textDirection': 'reversed',
+        'textAlignment': 'outer',
+        'textMargin': 5,
+        'textFontFamily': 'monospace',
+        'textStrokeStyle': null,
+        'textLineWidth': 2,
+        'textFillStyle': null,
+        'segments': // Define segments.
+            [{
+                    'text': '1100'
+                },
+                {
+                    'text': 'try again'
+                },
+                {
+                    'text': '2000'
+                },
+                {
+                    'text': '300'
+                }
+            ],
+        'animation': // Specify the animation to use.
+        {
+            'type': 'spinToStop',
+            'duration': 5, // Duration in seconds.
+            'spins': 8, // Number of complete spins.
+            'callbackFinished': alertPrize
+        }
+    });
+
+    // var dialog = document.getElementById('myDialog')
+    // dialog.style.top = ((window.innerHeight / 2) - (dialog.offsetHeight / 3)) + 'px';
+    // dialog.style.left = ((window.innerWidth / 2) - (dialog.offsetWidth / 2)) + 'px';
+
+
+    var loadedImg = new Image();
+
+
+    loadedImg.onload = function () {
+        theWheel.wheelImage = loadedImg; // Make wheelImage equal the loaded image object.
+        theWheel.draw(); // Also call draw function to render the wheel.
+
+    }
+    loadedImg.src = "https://laz-img-cdn.alicdn.com/images/ims-web/TB1HdQuhbj1gK0jSZFuXXcrHpXa.png";
+
+    var clicks = 0;
+    var urlFor2000 = "https://pages.daraz.com.bd/wow/i/bd/landingpage/dzone-voucher-2000?hybrid=1";
+    var urlFor1100 = "https://pages.daraz.com.bd/wow/i/bd/landingpage/dzone-voucher-1100?hybrid=1";
+    var urlFor300 = "https://pages.daraz.com.bd/wow/i/bd/landingpage/dzone-voucher-300?hybrid=1";
+    var defUrl = "https://pages.daraz.com.bd/wow/i/bd/landingpage/dzone-spin-the-wheel?hybrid=1";
+    var dzone = "https://pages.daraz.com.bd/wow/i/bd/landingpage/dzone?hybrid=1";
+
+    function clicked1() {
+        clicks += 1;
+        console.log(clicks);
+        if (clicks === 1) {
+            console.log('ok');
+            $(location).attr('href', urlFor1100);
+            console.log(urlFor1100);
+        }
+    }
+
+    function clicked2() {
+        clicks += 1;
+        console.log(clicks);
+        if (clicks === 1) {
+            console.log('ok');
+            $(location).attr('href', defUrl);
+            console.log(defUrl);
+        } 
+    }
+
+    function clicked3() {
+        clicks += 1;
+        console.log(clicks);
+        if (clicks === 1) {
+            console.log('ok');
+            $(location).attr('href', urlFor2000);
+            console.log(urlFor2000);
+        } 
+    }
+
+    function clicked4() {
+        clicks += 1;
+        console.log(clicks);
+        if (clicks === 1) {
+            console.log('ok');
+            $(location).attr('href', urlFor300);
+            console.log(urlFor300);
+        } 
+    }
+
+
+
+
+
+
+    var wheelPower = 0;
+    var wheelSpinning = false;
+
+    function startSpin() {
+        if (wheelSpinning == false) {
+            theWheel.animation.spins = 8;
+            document.getElementById('spin_button').src =
+                "https://laz-img-cdn.alicdn.com/images/ims-web/TB1JQH_hlr0gK0jSZFnXXbRRXXa.gif";
+            document.getElementById('spin_button').className = "";
+            theWheel.startAnimation();
+            wheelSpinning = true;
+        }
+    }
+
+    function resetWheel() {
+        theWheel.stopAnimation(false); // Stop the animation, false as param so does not call callback function.
+        theWheel.rotationAngle = 0; // Re-set the wheel angle to 0 degrees.
+        theWheel.draw(); // Call draw to render changes to the wheel.
+        document.getElementById('pw1').className = ""; // Remove all colours from the power level indicators.
+        document.getElementById('pw2').className = "";
+        document.getElementById('pw3').className = "";
+        wheelSpinning = false; // Reset to false to power buttons and spin can be clicked again.
+    }
+
+    function alertPrize(indicatedSegment) {
+        p1 = "1100";
+        p2 = "try again";
+        p3 = "2000";
+        p4 = "300";
+        console.log(indicatedSegment.text)
+        if (indicatedSegment.text === p1) {
+            // document.getElementById("myDialog").style.display = block;
+            document.getElementById("myDialog").showModal();
+
+            document.getElementById("textresult").innerHTML =
+                "<img src=\"https://laz-img-cdn.alicdn.com/images/ims-web/TB1y5gmhoT1gK0jSZFhXXaAtVXa.png\" >";
+            document.getElementById("pop-button").innerHTML =
+                "<a class='button' onclick='clicked2()'><img src= \"https://laz-img-cdn.alicdn.com/images/ims-web/TB1kP6_hlr0gK0jSZFnXXbRRXXa.png\"></a>";
+
+            console.log("1");
+        } else if (indicatedSegment.text === p2) {
+            // document.getElementById("myDialog").style.display = block;
+            document.getElementById("myDialog").showModal();
+            document.getElementById("textresult").innerHTML =
+                "<img src=\"https://laz-img-cdn.alicdn.com/images/ims-web/TB1y5gmhoT1gK0jSZFhXXaAtVXa.png\" >";
+            document.getElementById("pop-button").innerHTML =
+                "<a class='button' onclick='clicked2()'><img src= \"https://laz-img-cdn.alicdn.com/images/ims-web/TB1kP6_hlr0gK0jSZFnXXbRRXXa.png\"></a>";
+            console.log("2");
+        } else if (indicatedSegment.text === p3) {
+            // document.getElementById("myDialog").style.display = block;
+            document.getElementById("myDialog").showModal();
+            document.getElementById("textresult").innerHTML =
+                "<img src=\"https://laz-img-cdn.alicdn.com/images/ims-web/TB1thUshoT1gK0jSZFhXXaAtVXa.png\" >";
+            document.getElementById("pop-button").innerHTML =
+                "<a class='button' onclick='clicked3()'><img src= \"https://laz-img-cdn.alicdn.com/images/ims-web/TB1Y.wwhi_1gK0jSZFqXXcpaXXa.png\"></a>";
+            console.log("3")
+        } else {
+            // document.getElementById("myDialog").style.display = block;
+            document.getElementById("myDialog").showModal();
+            document.getElementById("textresult").innerHTML =
+                "<img src=\"https://laz-img-cdn.alicdn.com/images/ims-web/TB1y5gmhoT1gK0jSZFhXXaAtVXa.png\" >";
+            document.getElementById("pop-button").innerHTML =
+                "<a class='button' onclick='clicked2()'><img src= \"https://laz-img-cdn.alicdn.com/images/ims-web/TB1kP6_hlr0gK0jSZFnXXbRRXXa.png\"></a>";
+            console.log("4");
+        }
+    }
+</script>
