@@ -27,7 +27,8 @@
     init();
 
     function init() {
-        var MODEL_PATH = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/stacy_lightweight.glb';
+        // var MODEL_PATH = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/stacy_lightweight.glb';
+        var MODEL_PATH = '../stacy_lightweight.glb';
         var canvas = document.querySelector('#c');
         var backgroundColor = 0xf1f1f1; // Init the scene
 
